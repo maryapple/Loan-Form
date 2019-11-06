@@ -13,33 +13,28 @@ class App extends React.Component {
 	render(){
 		return (
 			<Styles>
-
-				<h1>React Final Form - Simple Example</h1>
-
-				<a href="https://final-form.org/react" target="_blank" rel="noopener noreferrer">
-					Read Docs
-                </a>
+				<h1>Кредит</h1>
 				<Form
 					onSubmit={onSubmit}
 					initialValues={{ stooge: 'larry', employed: false }}
 					render={({ handleSubmit, form, submitting, pristine, values }) => (
 						<form onSubmit={handleSubmit}>
 							<div>
-								<label>First Name</label>
-								<Field
-									name="firstName"
-									component="input"
-									type="text"
-									placeholder="First Name"
-								/>
-							</div>
-							<div>
-								<label>Last Name</label>
+								<label>Фамилия</label>
 								<Field
 									name="lastName"
 									component="input"
 									type="text"
-									placeholder="Last Name"
+									placeholder="Фамилия"
+								/>
+							</div>
+							<div>
+								<label>Имя</label>
+								<Field
+									name="firstName"
+									component="input"
+									type="text"
+									placeholder="Имя"
 								/>
 							</div>
 							<div>
