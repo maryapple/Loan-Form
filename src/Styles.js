@@ -135,9 +135,17 @@ export default styled.div`
       padding: 20px;
     }
 
+    // Классы для скрываемых блоков
     .hidden {
       display: none;
     }
+
+    .showed {
+      display: block;
+    }
+
+    #showdetails {
+      height: 20px;
+    }
   }
 `
-
