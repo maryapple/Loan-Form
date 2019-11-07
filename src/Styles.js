@@ -36,12 +36,7 @@ const btnPrimary = btn('#4f93ce', '#285f8f')
 export default styled.div`
   font-family: sans-serif;
 
-  h1 {
-    text-align: center;
-    color: #222;
-  }
-
-  h2 {
+  h1, h2 {
     text-align: center;
     color: #222;
   }
@@ -127,12 +122,6 @@ export default styled.div`
       color: #800;
       flex-flow: row nowrap;
       justify-content: center;
-    }
-    pre {
-      border: 1px solid #ccc;
-      background: rgba(0, 0, 0, 0.1);
-      box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.2);
-      padding: 20px;
     }
 
     // Классы для скрываемых блоков

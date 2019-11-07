@@ -51,8 +51,7 @@ class App extends React.Component {
 						handleSubmit,
 						form,
 						submitting,
-						pristine,
-						values
+						pristine
 					}) => (
 							<form onSubmit={handleSubmit}>
 
@@ -168,7 +167,6 @@ class App extends React.Component {
 										Очистить
             						</button>
 								</div>
-								{/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
 							</form>
 						)}
 				/>
