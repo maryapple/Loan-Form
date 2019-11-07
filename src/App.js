@@ -10,6 +10,17 @@ const onSubmit = async values => {
 }
 
 class App extends React.Component {
+
+	state = {
+		isShow: true
+	}
+
+	blockToggle = () => {
+		const { isShow } = this.state
+		this.setState({ isShow: !isShow })
+		// console.log('hkjhkjhkjhk')
+	}
+
 	render() {
 		return (
 			<Styles>
@@ -115,12 +126,13 @@ class App extends React.Component {
 									<Field name="subject"
 										component="input"
 										type="checkbox"
-										onChange={this.handleToggle}
+										onChange={this.blockToggle}
+										checked={this.state.isShow}
 									/>
 								</div>
 								
 								{/* Скрываемые блоки */}
-								<div className='subjectName'>
+								<div className='subjectName {this.state.isShow ? "show-input" : "hidden"}'>
 									<label>Предмет</label>
 									<Field
 										// className={this.state.isShow ? "show-input" : "hidden"}
