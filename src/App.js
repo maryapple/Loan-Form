@@ -29,10 +29,10 @@ class App extends React.Component {
 							errors.patronymic = 'Обязательное поле'
 						}
 						if (!values.tel) {
-							errors.patronymic = 'Обязательное поле'
+							errors.tel = 'Обязательное поле'
 						}
 						if (!values.email) {
-							errors.patronymic = 'Обязательное поле'
+							errors.email = 'Обязательное поле'
 						}
 						return errors
 					}}
@@ -45,6 +45,8 @@ class App extends React.Component {
 						values
 					}) => (
 							<form onSubmit={handleSubmit}>
+
+								{/* Обязательные для ввода поля */}
 								<Field name="lastName">
 									{({ input, meta }) => (
 										<div>
@@ -74,6 +76,9 @@ class App extends React.Component {
 										</div>
 									)}
 								</Field>
+
+
+								{/* Необязательное поля, с выпадающим списком */}
 								<div>
 									<label>Гражданство</label>
 									<Field name="citizenship" component="select">
@@ -83,6 +88,8 @@ class App extends React.Component {
 										<option value="bel">Беларусь</option>
 									</Field>
 								</div>
+
+								{/* Обязательные для ввода поля */}
 								<Field name="tel">
 									{({ input, meta }) => (
 										<div>
@@ -102,6 +109,7 @@ class App extends React.Component {
 									)}
 								</Field>
 
+								{/* Чекбокс, который открывает скрываемые блоки */}
 								<div className='specify-details'>
 									<label>Указать предмет кредита</label>
 									<Field name="subject"
@@ -110,7 +118,8 @@ class App extends React.Component {
 										onChange={this.handleToggle}
 									/>
 								</div>
-
+								
+								{/* Скрываемые блоки */}
 								<div className='subjectName'>
 									<label>Предмет</label>
 									<Field
@@ -130,7 +139,9 @@ class App extends React.Component {
 										placeholder='от 100000'
 									/>
 								</div>
+								
 
+								{/* Тут производится проверка */}
 								{submitError && <div className="error">{submitError}</div>}
 								<div className="buttons">
 									<button type="submit" disabled={submitting}>
