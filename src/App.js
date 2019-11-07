@@ -5,154 +5,148 @@ import { Form, Field } from 'react-final-form'
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 const onSubmit = async values => {
-    await sleep(300)
-    window.alert(JSON.stringify(values, 0, 2))
+	await sleep(300)
+	window.alert(JSON.stringify(values, 0, 2))
 }
 
 class App extends React.Component {
-	render(){
+	render() {
 		return (
 			<Styles>
-				<h1>Кредит</h1>
+				<h1>Заявление на взятие кредита</h1>
+				<h2>Заполните форму</h2>
 				<Form
 					onSubmit={onSubmit}
-					initialValues={{ stooge: 'larry', employed: false }}
-					render={({ handleSubmit, form, submitting, pristine, values }) => (
-						<form onSubmit={handleSubmit}>
-							<div>
-								<label>Фамилия</label>
-								<Field
-									name="lastName"
-									component="input"
-									type="text"
-									placeholder="Фамилия"
-								/>
-							</div>
-							<div>
-								<label>Имя</label>
-								<Field
-									name="firstName"
-									component="input"
-									type="text"
-									placeholder="Имя"
-								/>
-							</div>
-							<div>
-								<label>Employed</label>
-								<Field name="employed" component="input" type="checkbox" />
-							</div>
-							<div>
-								<label>Favorite Color</label>
-								<Field name="favoriteColor" component="select">
-									<option />
-									<option value="#ff0000">❤️ Red</option>
-									<option value="#00ff00">💚 Green</option>
-									<option value="#0000ff">💙 Blue</option>
+					validate={values => {
+						const errors = {}
+						if (!values.lastName) {
+							errors.lastName = 'Обязательное поле'
+						}
+						if (!values.firstName) {
+							errors.firstName = 'Обязательное поле'
+						}
+						if (!values.patronymic) {
+							errors.patronymic = 'Обязательное поле'
+						}
+						if (!values.tel) {
+							errors.patronymic = 'Обязательное поле'
+						}
+						if (!values.email) {
+							errors.patronymic = 'Обязательное поле'
+						}
+						return errors
+					}}
+					render={({
+						submitError,
+						handleSubmit,
+						form,
+						submitting,
+						pristine,
+						values
+					}) => (
+							<form onSubmit={handleSubmit}>
+								<Field name="lastName">
+									{({ input, meta }) => (
+										<div>
+											<label>Фамилия</label>
+											<input {...input} type="text" placeholder="Иванов" />
+											{(meta.error || meta.submitError) && meta.touched && (
+												<span>{meta.error || meta.submitError}</span>
+											)}
+										</div>
+									)}
 								</Field>
-							</div>
-							<div>
-								<label>Toppings</label>
-								<Field name="toppings" component="select" multiple>
-									<option value="chicken">🐓 Chicken</option>
-									<option value="ham">🐷 Ham</option>
-									<option value="mushrooms">🍄 Mushrooms</option>
-									<option value="cheese">🧀 Cheese</option>
-									<option value="tuna">🐟 Tuna</option>
-									<option value="pineapple">🍍 Pineapple</option>
+								<Field name="firstName">
+									{({ input, meta }) => (
+										<div>
+											<label>Имя</label>
+											<input {...input} type="text" placeholder="Иван" />
+											{meta.error && meta.touched && <span>{meta.error}</span>}
+										</div>
+									)}
 								</Field>
-							</div>
-							<div>
-								<label>Sauces</label>
+								<Field name="patronymic">
+									{({ input, meta }) => (
+										<div>
+											<label>Отчество</label>
+											<input {...input} type="text" placeholder="Иванович" />
+											{meta.error && meta.touched && <span>{meta.error}</span>}
+										</div>
+									)}
+								</Field>
 								<div>
-									<label>
-										<Field
-											name="sauces"
-											component="input"
-											type="checkbox"
-											value="ketchup"
-										/>{' '}
-										Ketchup
-                                    </label>
-									<label>
-										<Field
-											name="sauces"
-											component="input"
-											type="checkbox"
-											value="mustard"
-										/>{' '}
-										Mustard
-                                    </label>
-									<label>
-										<Field
-											name="sauces"
-											component="input"
-											type="checkbox"
-											value="mayonnaise"
-										/>{' '}
-										Mayonnaise
-                                    </label>
-									<label>
-										<Field
-											name="sauces"
-											component="input"
-											type="checkbox"
-											value="guacamole"
-										/>{' '}
-										Guacamole 🥑
-                                    </label>
+									<label>Гражданство</label>
+									<Field name="citizenship" component="select">
+										<option />
+										<option value="rus">Россия</option>
+										<option value="ucr">Украина</option>
+										<option value="bel">Беларусь</option>
+									</Field>
 								</div>
-							</div>
-							<div>
-								<label>Best Stooge</label>
+								<Field name="tel">
+									{({ input, meta }) => (
+										<div>
+											<label>Телефон</label>
+											<input {...input} type="tel" placeholder="880005553535" />
+											{meta.error && meta.touched && <span>{meta.error}</span>}
+										</div>
+									)}
+								</Field>
+								<Field name="email">
+									{({ input, meta }) => (
+										<div>
+											<label>Почта</label>
+											<input {...input} type="email" placeholder="example@mail.ru" />
+											{meta.error && meta.touched && <span>{meta.error}</span>}
+										</div>
+									)}
+								</Field>
+
+								<div className='specify-details'>
+									<label>Указать предмет кредита</label>
+									<Field name="subject"
+										component="input"
+										type="checkbox"
+										onChange={this.handleToggle}
+									/>
+								</div>
+
+								<div className='subjectName'>
+									<label>Предмет</label>
+									<Field
+										// className={this.state.isShow ? "show-input" : "hidden"}
+										name="subjectName"
+										component="input"
+										type="text"
+										placeholder='Квартира'
+									/>
+								</div>
 								<div>
-									<label>
-										<Field
-											name="stooge"
-											component="input"
-											type="radio"
-											value="larry"
-										/>{' '}
-										Larry
-                                    </label>
-									<label>
-										<Field
-											name="stooge"
-											component="input"
-											type="radio"
-											value="moe"
-										/>{' '}
-										Moe
-                                    </label>
-									<label>
-										<Field
-											name="stooge"
-											component="input"
-											type="radio"
-											value="curly"
-										/>{' '}
-										Curly
-                                </label>
+									<label>Стоимость</label>
+									<Field
+										name="subjectCost"
+										component="input"
+										type="text"
+										placeholder='от 100000'
+									/>
 								</div>
-							</div>
-							<div>
-								<label>Notes</label>
-								<Field name="notes" component="textarea" placeholder="Notes" />
-							</div>
-							<div className="buttons">
-								<button type="submit" disabled={submitting || pristine}>
-									Submit
-                                </button>
-								<button
-									type="button"
-									onClick={form.reset}
-									disabled={submitting || pristine}
-								>
-									Reset
-                                </button>
-							</div>
-							<pre>{JSON.stringify(values, 0, 2)}</pre>
-						</form>
-					)}
+
+								{submitError && <div className="error">{submitError}</div>}
+								<div className="buttons">
+									<button type="submit" disabled={submitting}>
+										Отправить
+            						</button>
+									<button
+										type="button"
+										onClick={form.reset}
+										disabled={submitting || pristine}
+									>
+										Очистить
+            						</button>
+								</div>
+								{/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
+							</form>
+						)}
 				/>
 			</Styles>
 		)
